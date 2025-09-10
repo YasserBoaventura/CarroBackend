@@ -27,7 +27,8 @@ public class Carro {
 	private String nome;
 	 
 	
-	@ManyToOne
+	@ManyToOne()
+    @JoinColumn(name = "marca_id")
 	private Marca marca; 
 	
 	@ManyToMany

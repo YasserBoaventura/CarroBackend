@@ -11,35 +11,32 @@ import carro.carro.config.JwtServiceGenerator;
 @Service
 public class LoginService {
 
-	@Autowired
-	private LoginRepository repository;
-	@Autowired
-	private JwtServiceGenerator jwtService;
-	@Autowired
-	private AuthenticationManager authenticationManager;
 
+	    @Autowired
+	    private LoginRepository repository;
+	    @Autowired
+	    private JwtServiceGenerator jwtService;
+	    @Autowired
+	    private AuthenticationManager authenticationManager;
 
-	
-	public String logar(Login login) {
+	    public String logar(Login login) {
+	        return this.gerarToken(login);
+	    }
 
-		String token = this.gerarToken(login);
-		return token;
+	    public String gerarToken(Login login) {
+	        // autentica usuário e senha
+	        authenticationManager.authenticate(
+	            new UsernamePasswordAuthenticationToken(
+	                login.getUsername(),
+	                login.getPassword()
+	            )
+	        );
 
+	        // busca usuário
+	        Usuario user = repository.findByUsername(login.getUsername())
+	                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+	        // gera JWT
+	        return jwtService.generateToken(user);
+	    }
 	}
-
-
-
-	public String gerarToken(Login login) {
-		authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(
-						login.getUsername(),
-						login.getPassword()
-						)
-				);
-		Usuario user = repository.findByUsername(login.getUsername()).get();
-		String jwtToken = jwtService.generateToken(user);
-		return jwtToken;
-	}
-
-
-}

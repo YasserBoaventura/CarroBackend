@@ -28,7 +28,7 @@ public class Usuario implements UserDetails{
 	private Long id;
 	private String username;
 	private String password;
-	private String role;
+	private String role; 
 
 	@Override
 	@JsonIgnore
@@ -42,7 +42,7 @@ public class Usuario implements UserDetails{
 	public String getPassword() {
 		return password;
 	}
-  
+   
 	@Override
 	public String getUsername() {
 		return username;

@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 		}
 		return new ResponseEntity<Map<String, String>>(erros, HttpStatus.BAD_REQUEST);
 	}
-
+         
 	//TRATAMENTO DE ERROS DE VALIDATIONS
 	@ExceptionHandler(ConstraintViolationException.class)
 	public ResponseEntity<Map<String, String>> handle02(ConstraintViolationException ex) {

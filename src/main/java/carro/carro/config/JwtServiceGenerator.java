@@ -23,7 +23,8 @@ public class JwtServiceGenerator {
 
 	///////////////////////////////////////////////////////
 	//Parâmetros para geração do token
-	public static final String SECRET_KEY = "UMACHAVESECRETADASUAAPIAQUIUMACHAVESECRETADASUAAPIAQUIUMACHAVESECRETADASUAAPIAQUIUMACHAVESECRETADASUAAPIAQUI";
+	public static final String SECRET_KEY = "k6R6F8hU9Ztq7XlG2fY0B4QnP+9JqJ8e2g1kD0vL6qM=";
+
 	public static final SignatureAlgorithm ALGORITMO_ASSINATURA = SignatureAlgorithm.HS256;
 	public static final int HORAS_EXPIRACAO_TOKEN = 1;
 
@@ -34,7 +35,7 @@ public class JwtServiceGenerator {
 		payloadData.put("username", usuario.getUsername());
 		payloadData.put("id", usuario.getId().toString());
 		payloadData.put("role", usuario.getRole());
-		payloadData.put("outracoisa", "teste");
+		//payloadData.put("outracoisa", "teste");
 		
 		return payloadData;
 	}
@@ -86,9 +87,9 @@ public class JwtServiceGenerator {
 		byte[] keyBytes = Decoders.BASE64.decode(this.SECRET_KEY);
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
+	
 
-
-	public String extractUsername(String token) {
+   public String extractUsername(String token) {
 		return extractClaim(token,Claims::getSubject);
 	}
 

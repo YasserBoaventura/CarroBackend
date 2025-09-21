@@ -35,13 +35,14 @@ public class SecurityConfig  {
 		.authorizeHttpRequests((requests) -> requests
 				.requestMatchers("/api/login").permitAll()
 			//.requestMatchers("/api/register").permitAll()
+         //  .requestMatchers("/API/Carro/findAll").hasAnyRole("ADIM") -> e uma das formas de proteger os edpoints de a cordo com o seu Role
 				.anyRequest().authenticated())
 		.authenticationProvider(authenticationProvider)
 		.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 		.sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-		return http.build();
-	}
+		return http.build(); 
+	} 
 
 	///////////////////////////////////////////////////////
 
@@ -71,4 +72,4 @@ public class SecurityConfig  {
 	
 
 
-}
+} 

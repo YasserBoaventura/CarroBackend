@@ -18,9 +18,18 @@ public class CarroService {
 	
 	
 	public String save(Carro carro) {
+		this.verificarNome(carro.getNome());
 		
 		this.carroRepository.save(carro);
 		return "Carro salvo com sucesso";
+		
+	}
+	public boolean  verificarNome(String nome ) {
+		if(nome.equals("Mercedes")) {
+			return true;
+		}else {
+			return false;
+		}
 		
 	}
 	public String update(Carro carro, long id) {

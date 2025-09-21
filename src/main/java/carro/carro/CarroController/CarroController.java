@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class CarroController {
    
 	@Autowired
 	private  CarroService carroService;
-	
+	     
 	 @PostMapping("/save")
 	 public ResponseEntity<String> save(@RequestBody Carro carro) {
 		try {
@@ -54,9 +55,9 @@ public class CarroController {
 			}
 		}
 	 
+	 @PreAuthorize("hasAuthority('ADIM')")  //usamos o @PreAuthorize para proteger o back conforme o seu nivel de acesso
 	 @DeleteMapping("/delete/{id}")
-	 
-	public	ResponseEntity<String> delete(@PathVariable long id) {
+	 public	ResponseEntity<String> delete(@PathVariable long id) {
 			try {
 			String nome= this.carroService.delete(id);
 			return new  ResponseEntity<>(nome, HttpStatus.OK);
@@ -66,7 +67,9 @@ public class CarroController {
 				
 				// TODO: handle exception
 			}
-		}
+		}         
+	 
+	 @PreAuthorize("hasAuthority('ADMIN')")// somente o ADMIN  pode ter acesso a esse edpoit 
 	 @GetMapping("/findAll")
 	public ResponseEntity<List<Carro>> findAll(){
 		 try {
@@ -79,6 +82,7 @@ public class CarroController {
 		 
 
 	 }
+	     
 	 @GetMapping("/findById/{id}")
 	public ResponseEntity<Carro> findById(@PathVariable long id){
 		 try {

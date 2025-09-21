@@ -37,6 +37,6 @@ public class Carro {
 	    joinColumns = @JoinColumn(name = "carro_id"),
 	    inverseJoinColumns = @JoinColumn(name = "acessorio_id")
 	)
-	private List<Acessorio> acessorios;
+	private List<Acessorio> acessorios; 
 
 }

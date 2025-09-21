@@ -16,6 +16,8 @@ import jakarta.validation.ConstraintViolationException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+	
+	
 	//TRATAMENTO DE ERROS DE VALIDATIONS
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<Map<String, String>> handle01(MethodArgumentNotValidException ex) {

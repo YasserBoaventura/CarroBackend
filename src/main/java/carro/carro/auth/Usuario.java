@@ -36,7 +36,7 @@ public class Usuario implements UserDetails{
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority(this.role));
 		return authorities;
-	}
+	}  
  
 	@Override
 	public String getPassword() {
